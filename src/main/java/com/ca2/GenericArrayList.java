@@ -103,7 +103,7 @@ public class GenericArrayList<T> implements IList<T> {
      */
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
-        if(index > nextFreeLoc) {
+        if(index > nextFreeLoc - 1) {
             throw new IndexOutOfBoundsException("Index cannot be outside the range");
         }
 

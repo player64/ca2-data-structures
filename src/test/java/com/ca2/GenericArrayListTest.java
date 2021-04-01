@@ -57,6 +57,7 @@ class GenericArrayListTest {
         arrayListStr.add("Test2");
         assertEquals("Test", arrayListStr.get(0));
         assertEquals("Test2", arrayListStr.get(1));
+        // System.out.println(arrayListStr.get(2));
         assertThrows(IndexOutOfBoundsException.class, () -> arrayListStr.get(2));
     }
 
