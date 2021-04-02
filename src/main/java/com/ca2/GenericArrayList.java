@@ -1,8 +1,7 @@
 package com.ca2;
 
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+import java.util.NoSuchElementException;
 
 public class GenericArrayList<T> implements IList<T> {
     /**
@@ -47,8 +46,8 @@ public class GenericArrayList<T> implements IList<T> {
      * @param element element to be inserted
      */
     @Override
-    public void add(int index, T element) throws IndexOutOfBoundsException {
-        if (index > nextFreeLoc) {
+    public void add(int index, T element) {
+        if (index > nextFreeLoc || index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be outside the range");
         }
 
@@ -77,13 +76,13 @@ public class GenericArrayList<T> implements IList<T> {
      * @return the element previously at the specified position
      */
     @Override
-    public T set(int index, T element) throws IndexOutOfBoundsException {
-        if(index > nextFreeLoc) {
+    public T set(int index, T element) {
+        if (index > nextFreeLoc || index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be outside the range");
         }
 
-        for(int i = 0; i < nextFreeLoc; i++) {
-            if(i == index) {
+        for (int i = 0; i < nextFreeLoc; i++) {
+            if (i == index) {
                 T previousElement = buffer[i];
                 buffer[i] = element;
 
@@ -102,8 +101,8 @@ public class GenericArrayList<T> implements IList<T> {
      * @return the element at the specified position in this list
      */
     @Override
-    public T get(int index) throws IndexOutOfBoundsException {
-        if(index > nextFreeLoc - 1) {
+    public T get(int index) {
+        if (index >= nextFreeLoc || index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be outside the range");
         }
 
@@ -126,7 +125,19 @@ public class GenericArrayList<T> implements IList<T> {
      */
     @Override
     public T remove(int index) {
-        return null;
+        if (index >= nextFreeLoc || index < 0) {
+            throw new IndexOutOfBoundsException("Index cannot be outside the range");
+        }
+        T removedElement = buffer[index];
+        for (int i = index; i < nextFreeLoc; i++) {
+            /*
+             * growArrayIfNeeded prevents ArrayIndexOutOfBoundsException if the size equals nextFreeLoc
+             * */
+            this.growArrayIfNeeded();
+            buffer[i] = buffer[i + 1];
+        }
+        nextFreeLoc--;
+        return removedElement;
     }
 
     /**
@@ -135,6 +146,13 @@ public class GenericArrayList<T> implements IList<T> {
      */
     @Override
     public boolean remove(T elem) {
+
+        for (int i = 0; i < nextFreeLoc; i++) {
+            if (buffer[i].equals(elem)) {
+                this.remove(i);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -156,14 +174,12 @@ public class GenericArrayList<T> implements IList<T> {
      */
     @Override
     public boolean contains(T element) {
-        boolean matchFound = false;
         for (int index = 0; index < nextFreeLoc; index++) {
             if (buffer[index].equals(element)) {
-                matchFound = true;
-                break;
+                return true;
             }
         }
-        return matchFound;
+        return false;
     }
 
 
@@ -209,54 +225,44 @@ public class GenericArrayList<T> implements IList<T> {
      * @return an iterator over the elements in this list in proper sequence
      */
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<T> iterator() {
+        return new GenericArrayListIterator();
     }
 
-    /**
-     * Performs the given action for each element of the {@code Iterable}
-     * until all elements have been processed or the action throws an
-     * exception.  Actions are performed in the order of iteration, if that
-     * order is specified.  Exceptions thrown by the action are relayed to the
-     * caller.
-     * <p>
-     * The behavior of this method is unspecified if the action performs
-     * side-effects that modify the underlying source of elements, unless an
-     * overriding class has specified a concurrent modification policy.
-     *
-     * @param action The action to be performed for each element
-     * @throws NullPointerException if the specified action is null
-     * @implSpec <p>The default implementation behaves as if:
-     * <pre>{@code
-     *     for (T t : this)
-     *         action.accept(t);
-     * }</pre>
-     * @since 1.8
-     */
-    @Override
-    public void forEach(Consumer action) {
-
+    public int getNext() {
+        return this.nextFreeLoc;
     }
 
-    /**
-     * Creates a {@link Spliterator} over the elements described by this
-     * {@code Iterable}.
-     *
-     * @return a {@code Spliterator} over the elements described by this
-     * {@code Iterable}.
-     * @implSpec The default implementation creates an
-     * <em><a href="../util/Spliterator.html#binding">early-binding</a></em>
-     * spliterator from the iterable's {@code Iterator}.  The spliterator
-     * inherits the <em>fail-fast</em> properties of the iterable's iterator.
-     * @implNote The default implementation should usually be overridden.  The
-     * spliterator returned by the default implementation has poor splitting
-     * capabilities, is unsized, and does not report any spliterator
-     * characteristics. Implementing classes can nearly always provide a
-     * better implementation.
-     * @since 1.8
-     */
-    @Override
-    public Spliterator spliterator() {
-        return null;
+
+    class GenericArrayListIterator implements Iterator<T> {
+        int cursor = 0;  // the current element we are looking at
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return cursor < nextFreeLoc;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return buffer[cursor++];
+        }
     }
+
+
 }
