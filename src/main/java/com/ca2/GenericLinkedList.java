@@ -2,10 +2,27 @@ package com.ca2;
 
 import java.util.Iterator;
 
+
+// https://www.geeksforgeeks.org/java-implementing-iterator-and-iterable-interface/
+// https://www.netsurfingzone.com/datastructures/singly-linked-list-implementation-using-generics-in-java/
+
+
 public class GenericLinkedList<T> implements IList<T> {
 
-    private Node head, tail;
+    private Node head = null, tail = null;
     private int size = 0;
+
+
+    private class Node {
+        T data;
+        Node next;
+
+        // Constructor to create a new node
+        Node(T data) {
+            this.data = data;
+            next = null;
+        }
+    }
 
     /**
      * Add an element to the end of the list
@@ -19,7 +36,7 @@ public class GenericLinkedList<T> implements IList<T> {
 
         tail = newNode;
 
-        if(last == null) {
+        if (last == null) {
             head = newNode;
         } else {
             last.next = newNode;
@@ -36,26 +53,29 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public void add(int index, T element) {
-        // https://www.geeksforgeeks.org/java-implementing-iterator-and-iterable-interface/
-        if(!isValidIndex(index)) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-
-        if(index == size) {
+        if (index == 0) {
+            addToStart(element);
+        } else if (index == size) {
             add(element);
         } else {
-            Node current = head;
-            for (int i = size; i > index; i--) {
-                System.out.println(current.data);
-                current = head.next;
-            }
-            /*Node first = head;
-            for(int i = 0; i <= index; i++) {
-                System.out.println(first.data);
-                first = first.next;
-            }*/
+            Node newNode = new Node(element);
+            Node leftNode = getNode(index - 1);
+            Node rightNode = getNode(index);
+
+            leftNode.next = newNode;
+            newNode.next = rightNode;
 
         }
+        size++;
+    }
+
+    public void addToStart(T val) {
+        Node newNode = new Node(val);
+        newNode.next = head;
+        head = newNode;
     }
 
     /**
@@ -67,7 +87,10 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public T set(int index, T element) {
-        return null;
+        Node node = getNode(index);
+        T prevData = node.data;
+        node.data = element;
+        return prevData;
     }
 
     /**
@@ -78,6 +101,30 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public T get(int index) {
+        Node node = getNode(index);
+        return (node == null) ? null : node.data;
+    }
+
+    /**
+     * Returns the element at the specified position in this list.
+     *
+     * @param index index of the element to return
+     * @return Node specified position in this list
+     */
+    private Node getNode(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+
+        Node current = head;
+        int i = 0;
+        while (current != null) {
+            if (i == index) {
+                return current;
+            }
+            current = current.next;
+            i++;
+        }
         return null;
     }
 
@@ -97,7 +144,30 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public T remove(int index) {
-        return null;
+/*        if(isEmpty() || index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }*/
+        Node deletedNode = getNode(index);
+
+        Node leftNode;
+        if (index == 0) {
+            leftNode = head.next;
+            head = leftNode;
+        } else {
+            leftNode = getNode(index - 1);
+        }
+
+        if (leftNode == null) {
+            tail = null;
+        } else if (index + 1 >= size) {
+            leftNode.next = null;
+            tail = leftNode;
+        } else {
+            leftNode.next = getNode(index + 1);
+        }
+        size--;
+
+        return deletedNode.data;
     }
 
     /**
@@ -106,7 +176,16 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean remove(T elem) {
-        return false;
+        if(isEmpty()) {
+            return false;
+        }
+
+        int index = getNodeIndex(elem);
+        if (index < 0) {
+            return false;
+        }
+        remove(index);
+        return true;
     }
 
     /**
@@ -127,7 +206,20 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean contains(T element) {
-        return false;
+        return getNodeIndex(element) >= 0;
+    }
+
+    private int getNodeIndex(T element) {
+        int i = 0;
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(element)) {
+                return i;
+            }
+            current = current.next;
+            i++;
+        }
+        return -1;
     }
 
     /**
@@ -148,7 +240,7 @@ public class GenericLinkedList<T> implements IList<T> {
         Node current = head;
         StringBuilder string = new StringBuilder();
         string.append("[ ");
-        while(current != null) {
+        while (current != null) {
             string.append(current.data).append(", ");
             current = current.next;
         }
@@ -156,19 +248,8 @@ public class GenericLinkedList<T> implements IList<T> {
         return string.toString();
     }
 
-    private boolean isValidIndex(int index) {
-        return index >= 0 && index <= size;
-    }
-
-    private class Node {
-        T data;
-        Node next;
-
-        // Constructor to create a new node
-        Node(T d) {
-            data = d;
-            next = null;
-        }
+    public boolean isInvalidIndex(int index) {
+        return (index < 0 || index > size);
     }
 
 
