@@ -63,11 +63,11 @@ public class GenericLinkedList<T> implements IList<T> {
             add(element);
         } else {
             Node newNode = new Node(element);
-            Node leftNode = getNode(index - 1);
-            Node rightNode = getNode(index);
+            Node prevNode = getNode(index - 1);
+            Node nextNode = getNode(index);
 
-            leftNode.next = newNode;
-            newNode.next = rightNode;
+            prevNode.next = newNode;
+            newNode.next = nextNode;
         }
         size++;
     }

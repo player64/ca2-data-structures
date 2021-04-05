@@ -18,7 +18,7 @@ class GenericLinkedListTest {
     }
 
     @Test
-    void testAddAtIndex() {
+    void addAtIndex() {
         GenericLinkedList<String> list = new GenericLinkedList<>();
         list.add("t1");
         list.add("t2");
@@ -107,7 +107,7 @@ class GenericLinkedListTest {
     }
 
     @Test
-    void testRemoveAtIndex()
+    void removeAtIndex2()
     {
         GenericLinkedList<String> list = new GenericLinkedList<>();
         list.add("t1");
@@ -118,6 +118,13 @@ class GenericLinkedListTest {
         list.add("t1");
         assertEquals("t1,", list.toString());
         assertThrows(IndexOutOfBoundsException.class, () -> list.remove(1));
+    }
+
+    @Test
+    void removeEmpty()
+    {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+        list.remove(1);
     }
 
     @Test
@@ -150,13 +157,11 @@ class GenericLinkedListTest {
         list.add("t3");
         list.add("t4");
 
-        StringBuilder string = new StringBuilder();
+        StringBuilder expectedString = new StringBuilder();
         for (String l : list) {
-            string.append(l).append(",");
+            expectedString.append(l).append(",");
         }
-
-        assertEquals("t1,t2,t3,t4,", string.toString());
-
+        assertEquals("t1,t2,t3,t4,", expectedString.toString());
     }
 
     @Test
