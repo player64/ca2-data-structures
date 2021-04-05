@@ -1,6 +1,7 @@
 package com.ca2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 // https://www.geeksforgeeks.org/java-implementing-iterator-and-iterable-interface/
@@ -67,13 +68,17 @@ public class GenericLinkedList<T> implements IList<T> {
 
             leftNode.next = newNode;
             newNode.next = rightNode;
-
         }
         size++;
     }
 
-    public void addToStart(T val) {
-        Node newNode = new Node(val);
+    /**
+     * Add an element to the start of the list
+     *
+     * @param elem element to be added
+     */
+    public void addToStart(T elem) {
+        Node newNode = new Node(elem);
         newNode.next = head;
         head = newNode;
     }
@@ -88,6 +93,7 @@ public class GenericLinkedList<T> implements IList<T> {
     @Override
     public T set(int index, T element) {
         Node node = getNode(index);
+        assert node != null;
         T prevData = node.data;
         node.data = element;
         return prevData;
@@ -139,14 +145,11 @@ public class GenericLinkedList<T> implements IList<T> {
     }
 
     /**
-     * @param index
+     * @param index the element to remove
      * @return the element removed from the list
      */
     @Override
     public T remove(int index) {
-/*        if(isEmpty() || index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Invalid index");
-        }*/
         Node deletedNode = getNode(index);
 
         Node leftNode;
@@ -176,7 +179,7 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean remove(T elem) {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return false;
         }
 
@@ -209,6 +212,11 @@ public class GenericLinkedList<T> implements IList<T> {
         return getNodeIndex(element) >= 0;
     }
 
+    /**
+     * This return index
+     * @param element the element to search found
+     * @return index
+     */
     private int getNodeIndex(T element) {
         int i = 0;
         Node current = head;
@@ -232,25 +240,46 @@ public class GenericLinkedList<T> implements IList<T> {
     @Override
     public Iterator<T> iterator() {
         //
-        return null;
+        return new GenericLinkedListIterator();
     }
 
     @Override
     public String toString() {
         Node current = head;
         StringBuilder string = new StringBuilder();
-        string.append("[ ");
         while (current != null) {
-            string.append(current.data).append(", ");
+            string.append(current.data).append(",");
             current = current.next;
         }
-        string.append("]");
         return string.toString();
     }
 
-    public boolean isInvalidIndex(int index) {
-        return (index < 0 || index > size);
+    class GenericLinkedListIterator implements Iterator<T> {
+        Node current = head;
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        public T next() {
+            T data = current.data;
+            current = current.next;
+            return data;
+        }
     }
-
-
 }

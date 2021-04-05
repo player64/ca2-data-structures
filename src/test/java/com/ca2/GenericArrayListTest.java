@@ -113,15 +113,16 @@ class GenericArrayListTest {
 
     @Test
     void iterator() {
+        arrayListStr.add("test0");
         arrayListStr.add("test1");
         arrayListStr.add("test2");
-        arrayListStr.add("test3");
 
-        int i = 1;
+        int i = 0;
         for (String s : arrayListStr) {
             assertEquals("test"+i, s);
             ++i;
         }
+        assertEquals(3, i);
     }
 
 }
