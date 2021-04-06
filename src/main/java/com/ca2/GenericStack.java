@@ -1,13 +1,11 @@
 package com.ca2;
 
 import java.util.EmptyStackException;
-import java.util.List;
 
-public class GenericStack<T> implements IStack<T>{
+public class GenericStack<T> implements IStack<T> {
     private final IList<T> stackData;
 
-    public GenericStack()
-    {
+    public GenericStack() {
         stackData = new GenericArrayList<>();
     }
 
@@ -33,7 +31,7 @@ public class GenericStack<T> implements IStack<T>{
      */
     @Override
     public T pop() {
-        if(empty()) {
+        if (empty()) {
             throw new EmptyStackException();
         }
         int key = stackData.size() - 1;
@@ -50,7 +48,7 @@ public class GenericStack<T> implements IStack<T>{
      */
     @Override
     public T peek() {
-        if(empty()) {
+        if (empty()) {
             throw new EmptyStackException();
         }
         int key = stackData.size() - 1;
