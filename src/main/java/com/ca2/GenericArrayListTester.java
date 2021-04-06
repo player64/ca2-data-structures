@@ -14,5 +14,8 @@ public class GenericArrayListTester {
         System.out.println(5+ (5<<1));
         Vector<String>  v = new Vector<>();
 
+
+
+
     }
 }
