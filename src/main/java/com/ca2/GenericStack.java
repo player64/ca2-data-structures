@@ -1,8 +1,9 @@
 package com.ca2;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
-public class GenericStack<T> implements IStack<T> {
+public class GenericStack<T> implements IStack<T>, Iterable<T> {
     private final IList<T> stackData;
 
     public GenericStack() {
@@ -73,5 +74,35 @@ public class GenericStack<T> implements IStack<T> {
             builder.append(stackData.get(i)).append(",");
         }
         return builder.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new GenericStackIterator();
+    }
+
+    class GenericStackIterator implements Iterator<T> {
+        int cursor = 0;
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return stackData.size() > cursor;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         */
+        @Override
+        public T next() {
+            return stackData.get(cursor++);
+        }
     }
 }

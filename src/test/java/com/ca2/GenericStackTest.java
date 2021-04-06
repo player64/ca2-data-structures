@@ -71,4 +71,34 @@ class GenericStackTest {
         stack.push(1);
         assertFalse(stack.empty());
     }
+
+    @Test
+    void iterate() {
+        GenericStack<Integer> stack = new GenericStack<>();
+        stack.push(0);
+        stack.push(1);
+
+        int i = 0;
+        for(int no : stack) {
+            assertEquals(i, no);
+            ++i;
+        }
+        assertEquals(2, i);
+    }
+
+    @Test
+    void iterateWithLinkedList()
+    {
+        GenericLinkedList<String> list = new GenericLinkedList<>();
+        list.add("test0");
+        list.add("test1");
+
+        GenericStack<String> stack = new GenericStack<>(list);
+        int i = 0;
+        for(String elem : stack) {
+            assertEquals("test"+i, elem);
+            i++;
+        }
+        assertEquals(2, i);
+    }
 }
