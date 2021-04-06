@@ -5,7 +5,7 @@ public interface IQueue<T> {
      * Inserts the specified element into the queue
      * @param element the element argument.
      */
-    public void enque(T element);
+    public void enqueue(T element);
 
     /**
      * Retrieves and removes the head of this queue.

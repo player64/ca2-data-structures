@@ -210,10 +210,10 @@ public class GenericArrayList<T> implements IList<T> {
     public String toString() {
         StringBuilder data = new StringBuilder();
         for (int i = 0; i < nextFreeLoc; i++) {
-            data.append(" ").append(buffer[i]).append(",");
+            data.append(buffer[i]).append(",");
         }
 
-        return "[" + data + " ]";
+        return data.toString();
     }
 
 

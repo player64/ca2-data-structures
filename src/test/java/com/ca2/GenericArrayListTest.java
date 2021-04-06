@@ -24,13 +24,13 @@ class GenericArrayListTest {
          * */
         for (int i = 0; i < 10; i++) {
             arrayListStr.add("A");
-            expectedString.append(" A,");
+            expectedString.append("A,");
 
             arrayListInt.add(i);
-            expectedInt.append(" ").append(i).append(",");
+            expectedInt.append(i).append(",");
         }
-        assertEquals("[" + expectedString + " ]", arrayListStr.toString());
-        assertEquals("[" + expectedInt + " ]", arrayListInt.toString());
+        assertEquals(expectedString.toString() , arrayListStr.toString());
+        assertEquals(expectedInt.toString(), arrayListInt.toString());
     }
 
     @Test
@@ -39,14 +39,14 @@ class GenericArrayListTest {
         arrayListStr.add("t");
         arrayListStr.add(0, "test");
         arrayListStr.add(1, "test2");
-        assertEquals("[ test, test2, t, ]", arrayListStr.toString());
+        assertEquals("test,test2,t,", arrayListStr.toString());
     }
 
     @Test
     void set() {
         arrayListStr.add("First");
         assertEquals("First", arrayListStr.set(0, "Second"));
-        assertEquals("[ Second, ]", arrayListStr.toString());
+        assertEquals("Second,", arrayListStr.toString());
         assertThrows(IndexOutOfBoundsException.class, () -> arrayListStr.set(2, "Out of range"));
     }
 
