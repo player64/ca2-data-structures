@@ -1,22 +1,18 @@
 package com.ca2;
 
 import java.util.EmptyStackException;
+import java.util.List;
 
-// https://www.java2novice.com/data-structures-in-java/stacks/generic-stack/
-// https://www.javaguides.net/2018/09/generic-stack-implementation-in-java.html
-
-public class GenericStack<T> implements IStack<T> {
-
-    private int stackSize = 0;
-    private int currentCapacity;
-    private static final int INITIAL_CAPACITY = 3;
-    private T[] stackData;
-
+public class GenericStack<T> implements IStack<T>{
+    private final IList<T> stackData;
 
     public GenericStack()
     {
-        currentCapacity = INITIAL_CAPACITY;
-        stackData = (T[]) new Object[currentCapacity];
+        stackData = new GenericArrayList<>();
+    }
+
+    public GenericStack(IList<T> data) {
+        stackData = data;
     }
 
     /**
@@ -26,10 +22,7 @@ public class GenericStack<T> implements IStack<T> {
      */
     @Override
     public void push(T element) {
-        if(stackSize >= stackData.length) {
-            grow();
-        }
-        stackData[stackSize++] = element;
+        stackData.add(element);
     }
 
     /**
@@ -43,10 +36,9 @@ public class GenericStack<T> implements IStack<T> {
         if(empty()) {
             throw new EmptyStackException();
         }
-
-        T entry = stackData[--stackSize];
-        stackData[stackSize] = null;
-
+        int key = stackData.size() - 1;
+        T entry = stackData.get(key);
+        stackData.remove(key);
         return entry;
     }
 
@@ -61,7 +53,8 @@ public class GenericStack<T> implements IStack<T> {
         if(empty()) {
             throw new EmptyStackException();
         }
-        return stackData[stackSize-1];
+        int key = stackData.size() - 1;
+        return stackData.get(key);
     }
 
     /**
@@ -72,28 +65,15 @@ public class GenericStack<T> implements IStack<T> {
      */
     @Override
     public boolean empty() {
-        return stackSize == 0;
+        return stackData.size() == 0;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < stackSize; i++) {
-            builder.append(stackData[i]).append(";");
+        for (int i = 0; i < stackData.size(); i++) {
+            builder.append(stackData.get(i)).append(",");
         }
         return builder.toString();
-    }
-
-    private void grow() {
-        T[] tempArr = (T[]) new Object[stackData.length * 2];
-        currentCapacity *= 2;
-
-        //copy from the old space into the new
-        for (int i = 0; i < stackData.length; i++) {
-            tempArr[i] = stackData[i];
-        }
-
-        //Now, update so that our managed array points at the newly created array
-        stackData = tempArr;
     }
 }
