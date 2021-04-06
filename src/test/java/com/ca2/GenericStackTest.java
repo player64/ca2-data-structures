@@ -43,7 +43,7 @@ class GenericStackTest {
 
     @Test
     void popEmpty() {
-        GenericStack<Integer> stack = new GenericStack<>(new GenericLinkedList<>());
+        GenericStack<Integer> stack = new GenericStack<>();
         assertThrows(EmptyStackException.class, stack::pop);
     }
 
