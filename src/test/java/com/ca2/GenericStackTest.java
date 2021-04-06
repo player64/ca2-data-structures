@@ -59,12 +59,13 @@ class GenericStackTest {
         stack.push(2);
         stack.push(3);
         stack.push(4);
+        stack.push(5);
 
+        assertEquals("1;2;3;4;5;", stack.toString());
+        assertEquals(5, stack.pop());
         assertEquals("1;2;3;4;", stack.toString());
         assertEquals(4, stack.pop());
         assertEquals("1;2;3;", stack.toString());
-        assertEquals(3, stack.pop());
-        assertEquals("1;2;", stack.toString());
     }
 
     @Test
