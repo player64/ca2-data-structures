@@ -3,11 +3,6 @@ package com.ca2;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
-// https://www.geeksforgeeks.org/java-implementing-iterator-and-iterable-interface/
-// https://www.netsurfingzone.com/datastructures/singly-linked-list-implementation-using-generics-in-java/
-
-
 public class GenericLinkedList<T> implements IList<T> {
 
     private Node head = null, tail = null;
@@ -152,21 +147,21 @@ public class GenericLinkedList<T> implements IList<T> {
     public T remove(int index) {
         Node deletedNode = getNode(index);
 
-        Node leftNode;
+        Node prevNode;
         if (index == 0) {
-            leftNode = head.next;
-            head = leftNode;
+            prevNode = head.next;
+            head = prevNode;
         } else {
-            leftNode = getNode(index - 1);
+            prevNode = getNode(index - 1);
         }
 
-        if (leftNode == null) {
+        if (prevNode == null) {
             tail = null;
         } else if (index + 1 >= size) {
-            leftNode.next = null;
-            tail = leftNode;
+            prevNode.next = null;
+            tail = prevNode;
         } else {
-            leftNode.next = getNode(index + 1);
+            prevNode.next = getNode(index + 1);
         }
         size--;
 
@@ -277,6 +272,9 @@ public class GenericLinkedList<T> implements IList<T> {
          */
         @Override
         public T next() {
+            if(!hasNext()) {
+                throw new NoSuchElementException();
+            }
             T data = current.data;
             current = current.next;
             return data;

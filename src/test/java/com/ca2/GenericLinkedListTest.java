@@ -124,7 +124,7 @@ class GenericLinkedListTest {
     void removeEmpty()
     {
         GenericLinkedList<Integer> list = new GenericLinkedList<>();
-        list.remove(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.remove(1));
     }
 
     @Test

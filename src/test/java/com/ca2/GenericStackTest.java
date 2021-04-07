@@ -73,7 +73,7 @@ class GenericStackTest {
     }
 
     @Test
-    void iterate() {
+    void iterator() {
         GenericStack<Integer> stack = new GenericStack<>();
         stack.push(0);
         stack.push(1);

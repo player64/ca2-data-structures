@@ -229,10 +229,6 @@ public class GenericArrayList<T> implements IList<T> {
         return new GenericArrayListIterator();
     }
 
-    public int getNext() {
-        return this.nextFreeLoc;
-    }
-
 
     class GenericArrayListIterator implements Iterator<T> {
         int cursor = 0;  // the current element we are looking at
