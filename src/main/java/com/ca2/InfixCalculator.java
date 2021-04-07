@@ -1,12 +1,18 @@
 package com.ca2;
 
 class InfixCalculator {
+    /**
+     * It calculate infix expression from given string
+     * @param expression string must starts with ( ends with )
+     * @return result of the
+     * @throws Exception if the expression doesn't start with ( and ends with )
+     */
     public static double evaluate(String expression) throws Exception {
         // remove all whitespaces
         expression = InfixCalculator.removeWhiteSpaces(expression);
 
         // test expression does it start with ( and ends with )
-        if(!expression.matches("^\\(.*\\)$")) {
+        if (!expression.matches("^\\(.*\\)$")) {
             throw new Exception("Infix calculator must starts with ( and ends with )");
         }
 
@@ -14,7 +20,7 @@ class InfixCalculator {
         GenericStack<Double> operands = new GenericStack<>();
 
         // convert to array each part of expression
-        String[] expressionParts = InfixCalculator.convertExpressionToArray(expression);
+        GenericArrayList<String> expressionParts = InfixCalculator.parseExpression(expression);
 
         for (String part : expressionParts) {
             switch (part) {
@@ -27,15 +33,15 @@ class InfixCalculator {
                     operators.push(part);
                     break;
                 case (")"):
-                    double nextOperands = operands.pop();
-                    double prevOperands = operands.pop();
+                    double rightOperands = operands.pop();
+                    double leftOperands = operands.pop();
                     double result = 0;
                     String operator = operators.pop();
                     switch (operator) {
-                        case ("+") -> result = prevOperands + nextOperands;
-                        case ("-") -> result = prevOperands - nextOperands;
-                        case ("*") -> result = prevOperands * nextOperands;
-                        case ("/") -> result = prevOperands / nextOperands;
+                        case ("+") -> result = leftOperands + rightOperands;
+                        case ("-") -> result = leftOperands - rightOperands;
+                        case ("*") -> result = leftOperands * rightOperands;
+                        case ("/") -> result = leftOperands / rightOperands;
                     }
                     operands.push(result);
                     break;
@@ -54,19 +60,48 @@ class InfixCalculator {
         return operands.pop();
     }
 
+    /**
+     * Removes all spaces from the expression
+     * @param expression raw expression
+     * @return String with no spaces
+     */
     public static String removeWhiteSpaces(String expression) {
         return expression.replaceAll("\\s+", "");
     }
 
-    public static String[] convertExpressionToArray(String expression) {
-        return expression.split("");
-    }
-
+    /**
+     * It walks through each character in expression if character is numeric it appends
+     * to string builder. Used to avoid a situation if expression holds for example 12 it push
+     * 12 rather than [1,2]
+     * @param expression raw expression
+     * @return GenericArrayList<String>
+     */
     public static GenericArrayList<String> parseExpression(String expression) {
-        GenericArrayList<String> output = new GenericArrayList<>();
-        for(char i : expression.toCharArray()) {
-            output.add(String.valueOf(i));
+        GenericArrayList<String> list = new GenericArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= expression.length() - 1; i++) {
+            char character = expression.charAt(i);
+
+            if(Character.isWhitespace(character)) {
+                // removes whitespace the method removeWhiteSpaces is called at evaluate, however, this one is used
+                // for tests
+                continue;
+            }
+
+            if (Character.isDigit(character)) {
+                // push numeric character to string builder
+                sb.append(character);
+            } else {
+                // add collection of numbers if not empty to array & restart stringBuilder
+                if(sb.length() > 0) {
+                    list.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+
+                // add character to GenericArrayList
+                list.add(String.valueOf(character));
+            }
         }
-        return output;
+        return list;
     }
 }
