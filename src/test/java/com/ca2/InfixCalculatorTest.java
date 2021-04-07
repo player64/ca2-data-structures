@@ -11,7 +11,7 @@ class InfixCalculatorTest {
     void evaluate() throws Exception {
         assertEquals(2, InfixCalculator.evaluate("( ((  2 +  1 ) * 2) / 3  ) "));
         assertEquals(6, InfixCalculator.evaluate("( ( 12 * 5 )/ (11 - 1) )"));
-        assertEquals(10, InfixCalculator.evaluate("(( 12 * 5 )/ 6)"));
+        assertEquals(50, InfixCalculator.evaluate("(( 100 * 50 )/ 100)"));
     }
 
     @Test
