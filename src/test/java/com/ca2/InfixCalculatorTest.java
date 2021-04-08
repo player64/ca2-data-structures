@@ -1,9 +1,6 @@
 package com.ca2;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Iterator;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InfixCalculatorTest {
@@ -12,19 +9,19 @@ class InfixCalculatorTest {
         assertEquals(2, InfixCalculator.evaluate("( ((  2 +  1 ) * 2) / 3  ) "));
         assertEquals(6, InfixCalculator.evaluate("( ( 12 * 5 )/ (11 - 1) )"));
         assertEquals(50, InfixCalculator.evaluate("(( 100 * 50 )/ 100)"));
+        assertEquals(5, InfixCalculator.evaluate("(2 * k + 3)"));
     }
 
     @Test
     void evaluateWithWrongExpression() {
-        String test = "1+23+4";
-        assertThrows(Exception.class, () -> InfixCalculator.evaluate(test));
+        assertThrows(Exception.class, () -> InfixCalculator.evaluate("1+23+4"));
     }
 
     @Test
     void removeWhiteSpaces() {
-        String testExpression = " (  2 +  1 ) * 2 / 3   ";
+        String testExpression = "(                  (  2 +  1 ) * 2 / 3  ) ";
         String removedSpaces = InfixCalculator.removeWhiteSpaces(testExpression);
-        assertEquals("(2+1)*2/3", removedSpaces);
+        assertEquals("((2+1)*2/3)", removedSpaces);
     }
 
     @Test

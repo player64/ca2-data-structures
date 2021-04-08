@@ -3,6 +3,7 @@ package com.ca2;
 class InfixCalculator {
     /**
      * It calculate infix expression from given string
+     *
      * @param expression string must starts with ( ends with )
      * @return result of the
      * @throws Exception if the expression doesn't start with ( and ends with )
@@ -49,19 +50,20 @@ class InfixCalculator {
                     // prevent adding non numeric parts
                     try {
                         operands.push(Double.parseDouble(part));
+                        break;
                     } catch (NumberFormatException e) {
                         System.out.println(part + " it's not a number omitting");
-                        continue;
+                        break;
                     }
-                    break;
+
             }
         }
-
         return operands.pop();
     }
 
     /**
      * Removes all spaces from the expression
+     *
      * @param expression raw expression
      * @return String with no spaces
      */
@@ -71,18 +73,20 @@ class InfixCalculator {
 
     /**
      * It walks through each character in expression if character is numeric it appends
-     * to string builder. Used to avoid a situation if expression holds for example 12 it push
+     * to string builder. It's used to avoid a situation if expression holds for example 12 it pushes
      * 12 rather than [1,2]
+     *
      * @param expression raw expression
      * @return GenericArrayList<String>
      */
     public static GenericArrayList<String> parseExpression(String expression) {
         GenericArrayList<String> list = new GenericArrayList<>();
         StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i <= expression.length() - 1; i++) {
             char character = expression.charAt(i);
 
-            if(Character.isWhitespace(character)) {
+            if (Character.isWhitespace(character)) {
                 // removes whitespace the method removeWhiteSpaces is called at evaluate, however, this one is used
                 // for tests
                 continue;
@@ -92,13 +96,14 @@ class InfixCalculator {
                 // push numeric character to string builder
                 sb.append(character);
             } else {
-                // add collection of numbers if not empty to array & restart stringBuilder
-                if(sb.length() > 0) {
+                // it's not a number
+                // add collection of numbers in StringBuilder if not empty to ArrayList & reset stringBuilder
+                if (sb.length() > 0) {
                     list.add(sb.toString());
                     sb = new StringBuilder();
                 }
 
-                // add character to GenericArrayList
+                // add operators to GenericArrayList
                 list.add(String.valueOf(character));
             }
         }
