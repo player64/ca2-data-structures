@@ -1,6 +1,5 @@
 package com.ca2;
 
-import org.jetbrains.annotations.NotNull;
 
 public class Person implements Comparable<Person>  {
     private final String firstname;
@@ -37,7 +36,7 @@ public class Person implements Comparable<Person>  {
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(@NotNull Person o) {
+    public int compareTo(Person o) {
         return Integer.compare(age, o.age);
     }
 

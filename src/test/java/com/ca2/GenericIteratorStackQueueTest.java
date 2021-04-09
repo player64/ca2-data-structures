@@ -1,8 +1,6 @@
 package com.ca2;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
