@@ -10,14 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class RotateAnalysis {
     public static void main(String[] args) {
         final int SIZE = 50;
-/*        final int SIZE1 = SIZE * 2;
-        final int SIZE2 = SIZE1 * 2;
-        final int SIZE3 = SIZE2 * 2;
-        final int SIZE4 = SIZE3 * 2;
-        final int SIZE5 = SIZE4 * 2;*/
-
-       // int[] testSizes = {SIZE, SIZE1, SIZE2, SIZE3, SIZE4, SIZE5};
-        int[] rotateBy = {1, 2, 3, 5, 10, 15, 25};
+        int[] distances = {1, 2, 3, 5, 10};
 
         GenericArrayList<Integer> arrayList = new GenericArrayList<>();
         GenericLinkedList<Integer> linkedList = new GenericLinkedList<>();
@@ -26,49 +19,35 @@ public class RotateAnalysis {
         fillArray(arrayList, SIZE);
         fillArray(linkedList, SIZE);
 
-        Timer timer = new Timer();
+        for (int distance : distances) {
+            System.out.println("============== arrayList rotated by " + distance + " ==============");
+            measure(arrayList, distance, "arrayList");
 
-        for (int rotate : rotateBy) {
-
-            // array list
-            timer.start();
-            GenericCollections.rotate2(arrayList, rotate);
-            timer.stop();
-            System.out.println("---");
-            System.out.println("ArrayList rotated by " + rotate);
-            System.out.println("Time: " + convertTimeToMicroSeconds(timer.getElapsedTime()) + "us");
-
-            System.out.println("---");
-
-            // linked list
-            timer.start();
-            GenericCollections.rotate2(linkedList, rotate);
-            timer.stop();
-
-            System.out.println("LinkedList rotated by " + rotate);
-            System.out.println("Time: " + convertTimeToMicroSeconds(timer.getElapsedTime()) + "us");
-
-            System.out.println("---");
-            System.out.println("--- ROTATE BY COLLECTIONS ---");
-
-            // collections rotate arrayList
-            timer.start();
-            GenericCollections.rotate(arrayList, rotate);
-            timer.stop();
-            System.out.println("Collections ArrayList rotated by " + rotate);
-            System.out.println("Time: " + convertTimeToMicroSeconds(timer.getElapsedTime()) + "us");
-
-            System.out.println("---");
-
-            // collections rotate linkedList
-            timer.start();
-            GenericCollections.rotate(linkedList, rotate);
-            timer.stop();
-            System.out.println("Collections LinkedList rotated by " + rotate);
-            System.out.println("Time: " + convertTimeToMicroSeconds(timer.getElapsedTime()) + "us");
-
-            System.out.println("---------------------------------------");
+            System.out.println("============== linkedList rotated by " + distance + " ==============");
+            measure(linkedList, distance, "linkedList");
         }
+    }
+
+    public static void measure(IList<Integer> list, int distance, String listName) {
+        // it helps to initialize class and get accurate reading of the time
+        GenericCollections.justInitialize();
+        Timer timer = new Timer();
+        timer.start();
+        list.rotate(distance);
+        timer.stop();
+        printReadings(timer.getElapsedTime(), listName + ".rotate(" + distance + ")");
+
+        // GenericCollections.rotate
+        timer.start();
+        GenericCollections.rotate(list, distance);
+        timer.stop();
+        printReadings(timer.getElapsedTime(), "GenericCollections.rotate(" + listName + "," + distance + ")");
+
+        // GenericCollections.rotate2
+        timer.start();
+        GenericCollections.rotate2(list, distance);
+        timer.stop();
+        printReadings(timer.getElapsedTime(), "GenericCollections.rotate2(" + listName + "," + distance + ")");
     }
 
     public static long convertTimeToMicroSeconds(long time) {
@@ -79,5 +58,12 @@ public class RotateAnalysis {
         for (int i = 1; i <= numberOfElements; ++i) {
             list.add(i);
         }
+    }
+
+    public static void printReadings(long time, String name) {
+        time = convertTimeToMicroSeconds(time);
+        System.out.println("Function: " + name);
+        System.out.println("Time: " + time + "us");
+        System.out.println("---");
     }
 }

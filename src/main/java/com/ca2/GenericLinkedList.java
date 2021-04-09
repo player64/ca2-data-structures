@@ -245,11 +245,11 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public void rotate(int distance) {
-        T current;
+        T temp;
 
         for (int i = 0; i < distance; i++) {
-            current = remove(size() - 1);
-            add(0, current);
+            temp = remove(size() - 1);
+            add(0, temp);
         }
 
     }

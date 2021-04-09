@@ -1,0 +1,100 @@
+============== arrayList rotated by 1 ==============
+Function: arrayList.rotate(1)
+Time: 11us
+---
+Function: GenericCollections.rotate(arrayList,1)
+Time: 80us
+---
+Function: GenericCollections.rotate2(arrayList,1)
+Time: 9us
+---
+============== linkedList rotated by 1 ==============
+Function: linkedList.rotate(1)
+Time: 18us
+---
+Function: GenericCollections.rotate(linkedList,1)
+Time: 56us
+---
+Function: GenericCollections.rotate2(linkedList,1)
+Time: 6us
+---
+============== arrayList rotated by 2 ==============
+Function: arrayList.rotate(2)
+Time: 5us
+---
+Function: GenericCollections.rotate(arrayList,2)
+Time: 58us
+---
+Function: GenericCollections.rotate2(arrayList,2)
+Time: 5us
+---
+============== linkedList rotated by 2 ==============
+Function: linkedList.rotate(2)
+Time: 6us
+---
+Function: GenericCollections.rotate(linkedList,2)
+Time: 116us
+---
+Function: GenericCollections.rotate2(linkedList,2)
+Time: 6us
+---
+============== arrayList rotated by 3 ==============
+Function: arrayList.rotate(3)
+Time: 6us
+---
+Function: GenericCollections.rotate(arrayList,3)
+Time: 34us
+---
+Function: GenericCollections.rotate2(arrayList,3)
+Time: 6us
+---
+============== linkedList rotated by 3 ==============
+Function: linkedList.rotate(3)
+Time: 4us
+---
+Function: GenericCollections.rotate(linkedList,3)
+Time: 63us
+---
+Function: GenericCollections.rotate2(linkedList,3)
+Time: 4us
+---
+============== arrayList rotated by 5 ==============
+Function: arrayList.rotate(5)
+Time: 9us
+---
+Function: GenericCollections.rotate(arrayList,5)
+Time: 49us
+---
+Function: GenericCollections.rotate2(arrayList,5)
+Time: 10us
+---
+============== linkedList rotated by 5 ==============
+Function: linkedList.rotate(5)
+Time: 5us
+---
+Function: GenericCollections.rotate(linkedList,5)
+Time: 101us
+---
+Function: GenericCollections.rotate2(linkedList,5)
+Time: 5us
+---
+============== arrayList rotated by 10 ==============
+Function: arrayList.rotate(10)
+Time: 16us
+---
+Function: GenericCollections.rotate(arrayList,10)
+Time: 110us
+---
+Function: GenericCollections.rotate2(arrayList,10)
+Time: 18us
+---
+============== linkedList rotated by 10 ==============
+Function: linkedList.rotate(10)
+Time: 9us
+---
+Function: GenericCollections.rotate(linkedList,10)
+Time: 145us
+---
+Function: GenericCollections.rotate2(linkedList,10)
+Time: 10us
+---

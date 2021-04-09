@@ -84,4 +84,9 @@ public class GenericCollections {
     public static <T extends Comparable<T>> void rotate2(IList<T> list, int distance) {
         list.rotate(distance);
     }
+
+    /**
+     * This function doesn't nothing it helps to initialize class to get accurate readings in analysis
+     */
+    public static void justInitialize () {}
 }
