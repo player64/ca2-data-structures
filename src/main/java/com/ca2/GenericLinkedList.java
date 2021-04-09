@@ -238,6 +238,22 @@ public class GenericLinkedList<T> implements IList<T> {
         return new GenericLinkedListIterator();
     }
 
+    /**
+     * Rotates the elements in the specified list by the specified distance.
+     *
+     * @param distance
+     */
+    @Override
+    public void rotate(int distance) {
+        T current;
+
+        for (int i = 0; i < distance; i++) {
+            current = remove(size() - 1);
+            add(0, current);
+        }
+
+    }
+
     @Override
     public String toString() {
         Node current = head;

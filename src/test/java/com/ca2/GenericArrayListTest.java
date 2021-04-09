@@ -2,6 +2,9 @@ package com.ca2;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenericArrayListTest {
@@ -125,4 +128,30 @@ class GenericArrayListTest {
         assertEquals(3, i);
     }
 
+    @Test
+    void rotate() {
+        for (int i = 1; i <= 10; i++) {
+            arrayListInt.add(i);
+        }
+        arrayListInt.rotate(1);
+        assertEquals("10,1,2,3,4,5,6,7,8,9,", arrayListInt.toString());
+    }
+
+    @Test
+    void rotateByTwo() {
+        for (int i = 1; i <= 10; i++) {
+            arrayListInt.add(i);
+        }
+        arrayListInt.rotate(2);
+        assertEquals("9,10,1,2,3,4,5,6,7,8,", arrayListInt.toString());
+    }
+
+    @Test
+    void rotateByFive() {
+        for (int i = 1; i <= 10; i++) {
+            arrayListInt.add(i);
+        }
+        arrayListInt.rotate(5);
+        assertEquals("6,7,8,9,10,1,2,3,4,5,", arrayListInt.toString());
+    }
 }

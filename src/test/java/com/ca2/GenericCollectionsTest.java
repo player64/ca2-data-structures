@@ -21,8 +21,8 @@ class GenericCollectionsTest {
         people.add(new Person(24, "Bryson", "Bill"));
         people.add(new Person(26, "Ness", "Patrick")); // 16
 
-        for (int j = 1; j <= 10; j++) {
-            numbers.add(j);
+        for (int i = 1; i <= 10; i++) {
+            numbers.add(i);
         }
     }
 
@@ -70,5 +70,23 @@ class GenericCollectionsTest {
         assertEquals(26, people.get(1).getAge());
         assertEquals(20, people.get(2).getAge());
         assertEquals(28, people.get(people.size() - 1).getAge());
+    }
+
+    @Test
+    void rotate2() {
+        GenericCollections.rotate2(numbers, 1);
+        assertEquals("10,1,2,3,4,5,6,7,8,9,", numbers.toString());
+    }
+
+    @Test
+    void rotate2WithLinkedList() {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+
+        GenericCollections.rotate(list, 1);
+        assertEquals("10,1,2,3,4,5,6,7,8,9,", list.toString());
     }
 }

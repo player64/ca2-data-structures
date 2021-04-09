@@ -53,6 +53,7 @@ public class GenericCollections {
     }
 
     /**
+     * Rotates the elements in the specified list by the specified distance.
      * @param list     the list to be rotated.
      * @param distance the distance to rotate the list. There are no constraints on this
      *                 value; it may be zero, negative, or greater than list.size().
@@ -62,7 +63,7 @@ public class GenericCollections {
         T last;
         int size = list.size();
 
-        for (int i = 1; i <= distance; i++) {
+        for (int i = 0; i < distance; i++) {
             last = list.get(size - 1);
 
             for (int j = size - 1; j > 0; j--) {
@@ -71,5 +72,16 @@ public class GenericCollections {
             }
             list.set(0, last);
         }
+    }
+
+    /**
+     * Rotates the elements in the specified list by the specified distance.
+     * @param list     the list to be rotated.
+     * @param distance the distance to rotate the list. There are no constraints on this
+     *                 value; it may be zero, negative, or greater than list.size().
+     * @param <T>
+     */
+    public static <T extends Comparable<T>> void rotate2(IList<T> list, int distance) {
+        list.rotate(distance);
     }
 }

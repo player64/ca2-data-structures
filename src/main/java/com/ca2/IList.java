@@ -73,5 +73,11 @@ public interface IList <T> extends Iterable<T> {
      */
     public Iterator<T> iterator();
 
+    /**
+     * Rotates the elements in the specified list by the specified distance.
+     * @param distance
+     */
+    public void rotate(int distance);
+
 }
 

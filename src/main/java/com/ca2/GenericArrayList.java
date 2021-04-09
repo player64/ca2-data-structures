@@ -229,6 +229,21 @@ public class GenericArrayList<T> implements IList<T> {
         return new GenericArrayListIterator();
     }
 
+    /**
+     * Rotates the elements in the specified list by the specified distance.
+     *
+     * @param distance
+     */
+    @Override
+    public void rotate(int distance) {
+        T current;
+
+        for (int i = 0; i < distance; i++) {
+            current = remove(size() - 1);
+            add(0, current);
+        }
+    }
+
 
     class GenericArrayListIterator implements Iterator<T> {
         int cursor = 0;  // the current element we are looking at

@@ -174,4 +174,34 @@ class GenericLinkedListTest {
         }
         assertEquals(0, i);
     }
+
+    @Test
+    void rotate() {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+        list.rotate(1);
+        assertEquals("10,1,2,3,4,5,6,7,8,9,", list.toString());
+    }
+
+    @Test
+    void rotateByTwo() {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+        list.rotate(2);
+        assertEquals("9,10,1,2,3,4,5,6,7,8,", list.toString());
+    }
+
+    @Test
+    void rotateByFive() {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+        }
+        list.rotate(5);
+        assertEquals("6,7,8,9,10,1,2,3,4,5,", list.toString());
+    }
 }
