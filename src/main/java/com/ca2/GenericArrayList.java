@@ -232,7 +232,7 @@ public class GenericArrayList<T> implements IList<T> {
     /**
      * Rotates the elements in the specified list by the specified distance.
      *
-     * @param distance
+     * @param distance no of elements rotated by
      */
     @Override
     public void rotate(int distance) {

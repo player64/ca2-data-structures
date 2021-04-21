@@ -7,7 +7,7 @@
 
 | One    | Two | Three | Four    | Five  | Six
 | --- | --- | --- | --- | --- | --- |
-| Span | <td rowspan=3 background=red>triple | hjfd |
+| Span | <td rowspan=2 background=red>triple | hjfd |
 | Span | | hjfd |
 
 

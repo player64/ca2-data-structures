@@ -2,15 +2,11 @@ package com.ca2.rotateAnalysis;
 
 import java.io.*;
 
-public class FileAnalysis {
+public class FileManagement {
     private final String fileName;
 
-    public FileAnalysis(String fileName) {
-        String sep = File.separator;
-        final String absolutePath = new File("").getAbsolutePath();
-        String path = "/src/main/java/com/ca2/rotateAnalysis/";
-        path = path.replace("/", sep);
-        this.fileName = absolutePath + path + fileName;
+    public FileManagement(String fileName) {
+        this.fileName = fileName;
     }
 
     private void createFile() {
