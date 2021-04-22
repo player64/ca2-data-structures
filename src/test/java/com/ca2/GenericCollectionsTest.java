@@ -64,6 +64,12 @@ class GenericCollectionsTest {
     }
 
     @Test
+    void rotateWithNegative() {
+        GenericCollections.rotate(numbers, -5);
+        assertEquals("6,7,8,9,10,1,2,3,4,5,", numbers.toString());
+    }
+
+    @Test
     void rotatePersonByTwo() {
         GenericCollections.rotate(people, 2);
         assertEquals(24, people.get(0).getAge());

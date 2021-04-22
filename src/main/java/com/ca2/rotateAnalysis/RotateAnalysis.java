@@ -13,8 +13,9 @@ public class RotateAnalysis {
                 "IList type",
                 "Number of elements",
                 "IList.rotate()",
-                "GenericCollections.rotate()",
-                "GenericCollections.rotate2()"
+                // "GenericCollections.rotate()",
+                // "GenericCollections.rotate2()",
+                "Look"
         };
 
         String[] tableHead2 = {
@@ -22,12 +23,11 @@ public class RotateAnalysis {
                 "Number of elements",
                 "Collections.rotate()",
         };
-        FileManagement file = new FileManagement("analysis.md");
-        for (int rotate = 1;  rotate < 11; ++rotate) {
+        FileManagement file = new FileManagement("analysi2.md");
+        for (int rotate = -10;  rotate < 11; ++rotate) {
             String title = "Generics rotated by " + rotate;
 
             AnalysisTable table = new AnalysisTable(title, tableHead);
-
 
 
             // analysis arrayList
@@ -36,9 +36,9 @@ public class RotateAnalysis {
             table.setCell("GenericArrayList");
             table.setCell(String.valueOf(SIZE));
             table.setCell(arrayListAnalysis.rotate() + "μs");
-            table.setCell(arrayListAnalysis.collectionsRotate() + "μs");
-            table.setCell(arrayListAnalysis.collectionsRotate2() + "μs");
-
+            // table.setCell(arrayListAnalysis.collectionsRotate() + "μs");
+            // table.setCell(arrayListAnalysis.collectionsRotate2() + "μs");
+            table.setCell(arrayList.toString());
 
             // analysis linkedList
             GenericLinkedList<Integer> linkedList = new GenericLinkedList<>();
@@ -46,14 +46,38 @@ public class RotateAnalysis {
             table.setCell("GenericLinkedList");
             table.setCell(String.valueOf(SIZE));
             table.setCell(linkedListAnalysis.rotate() + "μs");
-            table.setCell(linkedListAnalysis.collectionsRotate() + "μs");
-            table.setCell(linkedListAnalysis.collectionsRotate2() + "μs");
+            // table.setCell(linkedListAnalysis.collectionsRotate() + "μs");
+            // table.setCell(linkedListAnalysis.collectionsRotate2() + "μs");
+            table.setCell(linkedList.toString());
+
+
+            // new
+            ArrayList<Integer> array = new ArrayList<>();
+            LinkedList<Integer> linked = new LinkedList<>();
+            AnalysisJav arrayA = new AnalysisJav(array, SIZE, rotate);
+            AnalysisJav linkedA = new AnalysisJav(linked, SIZE, rotate);
+
+            table.setCell("ArrayList");
+            table.setCell(String.valueOf(SIZE));
+            table.setCell(arrayA.rotate() + "μs");
+            table.setCell(array.toString());
+            // table.setCell("---");
+            // table.setCell("---");
+
+
+
+            table.setCell("LinkedList");
+            table.setCell(String.valueOf(SIZE));
+            table.setCell(linkedA.rotate() + "μs");
+            //table.setCell("---");
+            //table.setCell("---");
+            table.setCell(linked.toString());
 
             // write results to file
             file.writeFile(table.produceTable());
 
 
-            ArrayList<Integer> array = new ArrayList<>();
+/*            ArrayList<Integer> array = new ArrayList<>();
             LinkedList<Integer> linked = new LinkedList<>();
 
             title = "Java rotated by " + rotate;
@@ -68,7 +92,7 @@ public class RotateAnalysis {
             table2.setCell("LinkedList");
             table2.setCell(String.valueOf(SIZE));
             table2.setCell(linkedA.rotate() + "μs");
-            file.writeFile(table2.produceTable());
+            file.writeFile(table2.produceTable());*/
         }
 
     }

@@ -72,4 +72,13 @@ class contains static methods that operate on collections, such as GenericArrayL
 and GenericLinkedList. 
 
 The one of requirement was to return the maximum element of the given collection. 
-The [Person](src/main/java/com/ca2/Person.java) have been used to test this functionality.  
+The [Person](src/main/java/com/ca2/Person.java) class have been used to test this functionality. 
+The tests are available in [GenericCollectionsTest](src/test/java/com/ca2/GenericCollectionsTest.java).
+The next requirement was to implement rotate method to GenericCollections class.
+<!-- Add rotate method to IList interface -->
+### Analysis of rotate methods
+This requirement was to add rotate method to IList interface and implement this method to GenericArrayList 
+and GenericLinkedList. 
+
+Then the next requirement was to provide performance analysis of the differences in the rotate methods
+applied to GenericArrayList and GenericLinkedList.

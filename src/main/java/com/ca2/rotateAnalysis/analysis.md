@@ -3,7 +3,6 @@
 | git status | List all new or modified files | | |
 | git diff | Show file differences that haven't been staged |
 
- https://www.javatpoint.com/difference-between-arraylist-and-linkedlist#:~:text=ArrayList%20and%20LinkedList%20both%20implements%20List%20interface%20and%20maintains%20insertion%20order.&text=1)%20ArrayList%20internally%20uses%20a,it%20internally%20uses%20an%20array.
 
 | One    | Two | Three | Four    | Five  | Six
 | --- | --- | --- | --- | --- | --- |

@@ -246,6 +246,13 @@ public class GenericLinkedList<T> implements IList<T> {
     @Override
     public void rotate(int distance) {
         T temp;
+        if(distance < 0) {
+            distance += size();
+        }
+
+        if(distance == 0) {
+            return;
+        }
 
         for (int i = 0; i < distance; i++) {
             temp = remove(size() - 1);

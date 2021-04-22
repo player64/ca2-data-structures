@@ -62,6 +62,14 @@ public class GenericCollections {
         T last;
         int size = list.size();
 
+        if(distance < 0) {
+            distance += size;
+        }
+
+        if(distance == 0) {
+            return;
+        }
+
         for (int i = 0; i < distance; i++) {
             last = list.get(size - 1);
 

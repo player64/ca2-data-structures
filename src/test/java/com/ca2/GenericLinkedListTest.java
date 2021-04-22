@@ -2,6 +2,9 @@ package com.ca2;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -202,6 +205,22 @@ class GenericLinkedListTest {
             list.add(i);
         }
         list.rotate(5);
+        assertEquals("6,7,8,9,10,1,2,3,4,5,", list.toString());
+    }
+
+    @Test
+    void rotateByNegativeFive() {
+        GenericLinkedList<Integer> list = new GenericLinkedList<>();
+        LinkedList<Integer> list2 = new LinkedList<>();
+        for (int i = 1; i <= 10; i++) {
+            list.add(i);
+            list2.add(i);
+        }
+
+        Collections.rotate(list2, -1);
+        System.out.println(list2);
+
+        list.rotate(-5);
         assertEquals("6,7,8,9,10,1,2,3,4,5,", list.toString());
     }
 }

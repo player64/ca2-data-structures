@@ -236,8 +236,15 @@ public class GenericArrayList<T> implements IList<T> {
      */
     @Override
     public void rotate(int distance) {
-        T temp;
+        if(distance < 0) {
+            distance += size();
+        }
 
+        if(distance == 0) {
+            return;
+        }
+
+        T temp;
         for (int i = 0; i < distance; i++) {
             temp = remove(size() - 1);
             add(0, temp);
