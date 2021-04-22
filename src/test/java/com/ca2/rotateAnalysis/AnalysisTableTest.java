@@ -3,6 +3,8 @@ package com.ca2.rotateAnalysis;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnalysisTableTest {
@@ -46,5 +48,17 @@ class AnalysisTableTest {
         expectedString += "| --- | --- | ";
 
         return expectedString;
+    }
+
+    @Test
+    void removeThisTest() {
+        int max = 3;
+        int min = 0;
+
+        Random rand = new Random();
+        for (int i = 0; i < 20; ++i) {
+            int randomNum = rand.nextInt(max);
+            System.out.println(randomNum);
+        }
     }
 }

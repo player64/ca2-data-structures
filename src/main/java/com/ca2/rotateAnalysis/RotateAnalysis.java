@@ -23,7 +23,7 @@ public class RotateAnalysis {
                 "Number of elements",
                 "Collections.rotate()",
         };
-        FileManagement file = new FileManagement("analysi2.md");
+        FileManagement file = new FileManagement("analysis.md");
         for (int rotate = -10;  rotate < 11; ++rotate) {
             String title = "Generics rotated by " + rotate;
 

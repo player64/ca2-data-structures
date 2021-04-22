@@ -102,6 +102,9 @@ public class GenericLinkedList<T> implements IList<T> {
      */
     @Override
     public T get(int index) {
+        if(index == size() - 1) {
+            return tail.data;
+        }
         Node node = getNode(index);
         return (node == null) ? null : node.data;
     }
