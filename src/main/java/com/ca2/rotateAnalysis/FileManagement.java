@@ -41,7 +41,7 @@ public class FileManagement {
     }
 
     /**
-     * Write the given string to the file
+     * Append to the file the given string
      * @param text String
      */
     public void writeFile(String text) {

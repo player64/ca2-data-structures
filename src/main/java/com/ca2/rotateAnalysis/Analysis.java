@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class Analysis {
     private final IList<Integer> list;
     private final int size;
-    private Timer timer;
+    private final Timer timer;
 
     /**
      * Class constructor initialises class attributes and fills the list

@@ -73,7 +73,7 @@ class InfixCalculator {
 
     /**
      * It walks through each character in expression if character is numeric it appends
-     * to string builder. It's used to avoid a situation if expression holds for example 12 it pushes
+     * to the string builder. It's used to avoid a situation if expression holds for example 12 it pushes
      * 12 rather than [1,2]
      *
      * @param expression raw expression
