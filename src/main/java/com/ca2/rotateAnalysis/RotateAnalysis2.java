@@ -30,23 +30,20 @@ public class RotateAnalysis2 {
         int rotate = 10;
         {
 
-
-
-
             for(int size = 10; size <= 100000; size*=2) {
                 String title = "Generics rotated by " + rotate;
                 GenericArrayList<AnalysisCollection> aCollection = new GenericArrayList<>();
                 AnalysisTable table = new AnalysisTable(title, tableHead);
                 // analysis arrayList
                 GenericArrayList<Integer> arrayList = new GenericArrayList<>();
-                Analysis arrayListAnalysis = new Analysis(arrayList, size, rotate);
+                Analysis arrayListAnalysis = new Analysis(arrayList, size);
 
-                aCollection.add(new AnalysisCollection("GenericArrayList", arrayListAnalysis.collectionsRotate(), size));
+                aCollection.add(new AnalysisCollection("GenericArrayList", arrayListAnalysis.collectionsRotate(rotate), size));
 
                 // lined list
                 GenericLinkedList<Integer> linkedList = new GenericLinkedList<>();
-                Analysis linkedListAnalysis = new Analysis(linkedList, size, rotate);
-                aCollection.add(new AnalysisCollection("GenericLinkedList", linkedListAnalysis.collectionsRotate(), size));
+                Analysis linkedListAnalysis = new Analysis(linkedList, size);
+                aCollection.add(new AnalysisCollection("GenericLinkedList", linkedListAnalysis.collectionsRotate(rotate), size));
 
                 // arrayList
                 ArrayList<Integer> jArrayList = new ArrayList<>();

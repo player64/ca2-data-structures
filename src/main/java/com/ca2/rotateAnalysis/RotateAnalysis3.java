@@ -50,10 +50,10 @@ public class RotateAnalysis3 {
     public static AnalysisCollection2 analysis(String name, IList<Integer> list, int size) {
         int ROTATE_BY = 5;
         long[] times = new long[3];
-        Analysis analysis = new Analysis(list, size, ROTATE_BY);
-        times[0] = analysis.rotate();
-        times[1] = analysis.collectionsRotate();
-        times[2] = analysis.collectionsRotate2();
+        Analysis analysis = new Analysis(list, size);
+        times[0] = analysis.rotate(ROTATE_BY);
+        times[1] = analysis.collectionsRotate(ROTATE_BY);
+        times[2] = analysis.collectionsRotate2(ROTATE_BY);
 
         return new AnalysisCollection2(name, size, times);
     }

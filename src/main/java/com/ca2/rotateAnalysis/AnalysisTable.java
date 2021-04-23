@@ -1,5 +1,8 @@
 package com.ca2.rotateAnalysis;
 
+/**
+ * It build the table in md file format
+ */
 public class AnalysisTable {
     private final String head;
     private String body = "";
@@ -7,11 +10,19 @@ public class AnalysisTable {
     private final int rowSize;
     private int tempRowSize = 0;
 
+    /**
+     * Builds the table head
+     * @param title String
+     * @param headNames String[]
+     */
     AnalysisTable(String title, String[] headNames) {
         rowSize = headNames.length;
         row = new StringBuilder();
+        StringBuilder tempHead = new StringBuilder();
 
-        StringBuilder tempHead = new StringBuilder("# " + title);
+        if(!title.equals("")) {
+            tempHead.append("# ").append(title);
+        }
 
         tempHead.append("\n| ");
 
@@ -27,22 +38,42 @@ public class AnalysisTable {
         head = tempHead.toString();
     }
 
+    /**
+     * Getting the head of the table
+     * @return String
+     */
     public String getHead() {
         return head;
     }
 
+    /**
+     * Getting the table body
+     * @return String
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * Setting the row
+     * @param row String
+     */
     private void setRow(String row) {
         body += row;
     }
 
+    /**
+     * Returns the whole table
+     * @return String
+     */
     public String produceTable() {
         return getHead() + getBody();
     }
 
+    /**
+     * Setting the table cell
+     * @param cell String
+     */
     public void setCell(String cell) {
         if(tempRowSize == 0) {
             row.append("\n| ");

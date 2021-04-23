@@ -1,14 +1,23 @@
 package com.ca2.rotateAnalysis;
-
 import java.io.*;
 
+/**
+ * It creates the file
+ */
 public class FileManagement {
     private final String fileName;
 
+    /**
+     * It initialise by setting the file name
+     * @param fileName String the file name
+     */
     public FileManagement(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Creates the file in the root directory
+     */
     private void createFile() {
         try {
             File file = new File(fileName);
@@ -22,11 +31,19 @@ public class FileManagement {
         }
     }
 
+    /**
+     * Checks is file with file exists
+     * @return boolean
+     */
     private boolean fileExists() {
         File file = new File(fileName);
         return file.exists();
     }
 
+    /**
+     * Write the given string to the file
+     * @param text String
+     */
     public void writeFile(String text) {
         if (!fileExists()) {
             createFile();
