@@ -1,5 +1,5 @@
 # CA#2 - Data structures and algorithms
-This assignment aims to present practical knowledge of data structures and algorithms. The app has been created as
+This assignment aims to present practical knowledge of data structures and algorithms. The app has been created as a
 Gradle project. The source files are located in
 `/src/main/java/com/ca2` the unit test are located in `/src/test/java/com/ca2`.
 
